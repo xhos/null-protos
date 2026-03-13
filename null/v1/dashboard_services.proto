@@ -4,10 +4,10 @@ package null.v1;
 
 import "null/v1/account.proto";
 import "null/v1/category.proto";
+import "null/v1/common.proto";
 import "null/v1/dashboard.proto";
 import "null/v1/enums.proto";
 import "google/type/date.proto";
-import "google/type/money.proto";
 
 // analytics and reporting
 service DashboardService {
@@ -82,9 +82,9 @@ message GetFinancialSummaryRequest {
 }
 
 message GetFinancialSummaryResponse {
-  google.type.Money total_balance = 1;
-  google.type.Money total_debt = 2;
-  google.type.Money net_balance = 3;
+  Money total_balance = 1;
+  Money total_debt = 2;
+  Money net_balance = 3;
 }
 
 message GetCategorySpendingComparisonRequest {

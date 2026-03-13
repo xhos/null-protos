@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package null.v1;
 
+import "null/v1/common.proto";
 import "null/v1/enums.proto";
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-import "google/type/money.proto";
 
 message Account {
   int64 id = 1;
@@ -19,14 +19,15 @@ message Account {
     max_len: 100
   }];
   AccountType type = 5 [(buf.validate.field).enum.defined_only = true];
-  google.type.Money anchor_balance = 6;
+  Money anchor_balance = 6;
   google.protobuf.Timestamp anchor_date = 7;
   google.protobuf.Timestamp created_at = 8;
   google.protobuf.Timestamp updated_at = 9;
-  optional string alias = 10 [(buf.validate.field).string = {
+  optional string friendly_name = 10 [(buf.validate.field).string = {
     min_len: 1,
     max_len: 50
   }];
+  repeated string aliases = 14;
   string main_currency = 11 [(buf.validate.field).string = {
     len: 3,
     pattern: "^[A-Z]{3}$"
@@ -41,13 +42,13 @@ message Account {
       }
     }
   }];
-  google.type.Money balance = 13;
+  Money balance = 13;
 }
 
 message AccountBalance {
   int64 id = 1;
   string name = 2;
   AccountType account_type = 3;
-  google.type.Money current_balance = 4;
+  Money current_balance = 4;
   string currency = 5;
 }

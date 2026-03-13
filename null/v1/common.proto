@@ -4,6 +4,18 @@ package null.v1;
 
 import "google/protobuf/timestamp.proto";
 
+// Money represents a monetary amount.
+//
+// JSON encoding: {"amount": 6.50, "currency_code": "USD"}
+//
+// Note: amount is stored as a double (decimal dollars/units), NOT cents.
+// This avoids the int64-as-string encoding of google.type.Money.
+// For $6.50 use amount=6.50, not amount=650.
+message Money {
+  double amount = 1;
+  string currency_code = 2; // ISO 4217, e.g. "USD", "CAD", "EUR"
+}
+
 message Location {
   double latitude = 1; // WGS84 decimal degrees
   double longitude = 2; // WGS84 decimal degrees

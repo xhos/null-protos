@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package null.v1;
 
-import "google/type/money.proto";
+import "null/v1/common.proto";
 import "buf/validate/validate.proto";
 
 message Category {
@@ -22,12 +22,12 @@ message Category {
 message CategoryWithUsage {
   Category category = 1;
   int64 usage_count = 2;
-  google.type.Money total_amount = 3;
+  Money total_amount = 3;
 }
 
 message CategoryWithUserUsage {
   Category category = 1;
   int64 user_usage_count = 2;
-  google.type.Money user_total_amount = 3;
+  Money user_total_amount = 3;
 }
 

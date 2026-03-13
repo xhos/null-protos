@@ -3,15 +3,15 @@ syntax = "proto3";
 package null.v1;
 
 import "null/v1/category.proto";
+import "null/v1/common.proto";
 import "null/v1/enums.proto";
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-import "google/type/money.proto";
 
 message Transaction {
   int64 id = 1;
   google.protobuf.Timestamp tx_date = 2;
-  google.type.Money tx_amount = 3;
+  Money tx_amount = 3;
   TransactionDirection direction = 4;
   int64 account_id = 5;
 
@@ -29,10 +29,10 @@ message Transaction {
   optional string user_notes = 12 [(buf.validate.field).string.max_len = 1000];
 
   // balance after this tx
-  optional google.type.Money balance_after = 13;
+  optional Money balance_after = 13;
 
   // FX details
-  optional google.type.Money foreign_amount = 14;
+  optional Money foreign_amount = 14;
   optional double exchange_rate = 15 [(buf.validate.field).double = {
     gt: 0,
     lt: 1000
