@@ -4,7 +4,7 @@ package null.v1;
 
 import "null/v1/account.proto";
 import "null/v1/category.proto";
-import "null/v1/common.proto";
+import "google/type/money.proto";
 import "null/v1/dashboard.proto";
 import "null/v1/enums.proto";
 import "google/type/date.proto";
@@ -82,9 +82,9 @@ message GetFinancialSummaryRequest {
 }
 
 message GetFinancialSummaryResponse {
-  Money total_balance = 1;
-  Money total_debt = 2;
-  Money net_balance = 3;
+  google.type.Moneytotal_balance = 1;
+  google.type.Moneytotal_debt = 2;
+  google.type.Moneynet_balance = 3;
 }
 
 message GetCategorySpendingComparisonRequest {

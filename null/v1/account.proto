@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package null.v1;
 
-import "null/v1/common.proto";
+import "google/type/money.proto";
 import "null/v1/enums.proto";
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
@@ -19,7 +19,7 @@ message Account {
     max_len: 100
   }];
   AccountType type = 5 [(buf.validate.field).enum.defined_only = true];
-  Money anchor_balance = 6;
+  google.type.Moneyanchor_balance = 6;
   google.protobuf.Timestamp anchor_date = 7;
   google.protobuf.Timestamp created_at = 8;
   google.protobuf.Timestamp updated_at = 9;
@@ -42,13 +42,13 @@ message Account {
       }
     }
   }];
-  Money balance = 13;
+  google.type.Moneybalance = 13;
 }
 
 message AccountBalance {
   int64 id = 1;
   string name = 2;
   AccountType account_type = 3;
-  Money current_balance = 4;
+  google.type.Moneycurrent_balance = 4;
   string currency = 5;
 }

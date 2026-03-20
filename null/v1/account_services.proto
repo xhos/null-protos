@@ -3,7 +3,7 @@ syntax = "proto3";
 package null.v1;
 
 import "null/v1/account.proto";
-import "null/v1/common.proto";
+import "google/type/money.proto";
 import "null/v1/enums.proto";
 import "buf/validate/validate.proto";
 import "google/protobuf/field_mask.proto";
@@ -44,7 +44,7 @@ message CreateAccountRequest {
   string bank = 3;
   AccountType type = 4;
   optional string friendly_name = 5;
-  Money anchor_balance = 6;
+  google.type.Moneyanchor_balance = 6;
   string main_currency = 7;
   repeated string colors = 8;
 }
@@ -64,7 +64,7 @@ message UpdateAccountRequest {
   optional AccountType account_type = 6;
   optional string friendly_name = 7;
   optional google.protobuf.Timestamp anchor_date = 8;
-  optional Money anchor_balance = 9;
+  optional google.type.Moneyanchor_balance = 9;
   optional string main_currency = 10;
   repeated string colors = 11;
 }
