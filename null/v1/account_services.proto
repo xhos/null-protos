@@ -15,6 +15,10 @@ service AccountService {
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
   rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse);
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
+  rpc AddAccountAlias(AddAccountAliasRequest) returns (AddAccountAliasResponse);
+  rpc RemoveAccountAlias(RemoveAccountAliasRequest) returns (RemoveAccountAliasResponse);
+  rpc SetAccountAliases(SetAccountAliasesRequest) returns (SetAccountAliasesResponse);
+  rpc FindAccountByAlias(FindAccountByAliasRequest) returns (FindAccountByAliasResponse);
 }
 
 message ListAccountsRequest {
@@ -74,4 +78,33 @@ message DeleteAccountRequest {
 
 message DeleteAccountResponse {
   int64 affected_rows = 1;
+}
+
+message AddAccountAliasRequest {
+  int64 account_id = 1 [(buf.validate.field).int64.gt = 0];
+  string alias = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+message AddAccountAliasResponse {}
+
+message RemoveAccountAliasRequest {
+  int64 account_id = 1 [(buf.validate.field).int64.gt = 0];
+  string alias = 2 [(buf.validate.field).string.min_len = 1];
+}
+
+message RemoveAccountAliasResponse {}
+
+message SetAccountAliasesRequest {
+  int64 account_id = 1 [(buf.validate.field).int64.gt = 0];
+  repeated string aliases = 2;
+}
+
+message SetAccountAliasesResponse {}
+
+message FindAccountByAliasRequest {
+  string alias = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+message FindAccountByAliasResponse {
+  Account account = 1;
 }
