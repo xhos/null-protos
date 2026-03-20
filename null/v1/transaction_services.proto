@@ -30,8 +30,8 @@ message ListTransactionsRequest {
   optional google.protobuf.Timestamp start_date = 5;
   optional google.protobuf.Timestamp end_date = 6;
   optional Cursor cursor = 7;
-  optional google.type.Moneyamount_min = 8;
-  optional google.type.Moneyamount_max = 9;
+  optional google.type.Money amount_min = 8;
+  optional google.type.Money amount_max = 9;
   optional TransactionDirection direction = 10 [(buf.validate.field).enum.defined_only = true];
   repeated int64 account_ids = 11;
   repeated string categories = 12;
@@ -61,13 +61,13 @@ message GetTransactionResponse {
 message TransactionInput {
   int64 account_id = 1 [(buf.validate.field).int64.gt = 0];
   google.protobuf.Timestamp tx_date = 2;
-  google.type.Moneytx_amount = 3;
+  google.type.Money tx_amount = 3;
   TransactionDirection direction = 4;
   optional string description = 5;
   optional string merchant = 6;
   optional string user_notes = 7;
   optional int64 category_id = 8;
-  optional google.type.Moneyforeign_amount = 9;
+  optional google.type.Money foreign_amount = 9;
   optional double exchange_rate = 10;
 }
 
@@ -87,13 +87,13 @@ message UpdateTransactionRequest {
   google.protobuf.FieldMask update_mask = 3;
 
   optional google.protobuf.Timestamp tx_date = 4;
-  optional google.type.Moneytx_amount = 5;
+  optional google.type.Money tx_amount = 5;
   optional TransactionDirection direction = 6;
   optional string description = 7;
   optional string merchant = 8;
   optional string user_notes = 9;
   optional int64 category_id = 10;
-  optional google.type.Moneyforeign_amount = 11;
+  optional google.type.Money foreign_amount = 11;
   optional double exchange_rate = 12;
   optional int64 account_id = 13 [(buf.validate.field).int64.gt = 0];
 }

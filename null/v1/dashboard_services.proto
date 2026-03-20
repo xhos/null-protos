@@ -82,9 +82,9 @@ message GetFinancialSummaryRequest {
 }
 
 message GetFinancialSummaryResponse {
-  google.type.Moneytotal_balance = 1;
-  google.type.Moneytotal_debt = 2;
-  google.type.Moneynet_balance = 3;
+  google.type.Money total_balance = 1;
+  google.type.Money total_debt = 2;
+  google.type.Money net_balance = 3;
 }
 
 message GetCategorySpendingComparisonRequest {

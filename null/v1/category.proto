@@ -22,12 +22,12 @@ message Category {
 message CategoryWithUsage {
   Category category = 1;
   int64 usage_count = 2;
-  google.type.Moneytotal_amount = 3;
+  google.type.Money total_amount = 3;
 }
 
 message CategoryWithUserUsage {
   Category category = 1;
   int64 user_usage_count = 2;
-  google.type.Moneyuser_total_amount = 3;
+  google.type.Money user_total_amount = 3;
 }
 

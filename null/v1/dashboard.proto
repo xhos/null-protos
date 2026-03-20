@@ -8,22 +8,22 @@ import "google/type/date.proto";
 
 message TrendPoint {
   google.type.Date date = 1; // YYYY-MM-DD
-  google.type.Moneyincome = 2;
-  google.type.Moneyexpenses = 3;
+  google.type.Money income = 2;
+  google.type.Money expenses = 3;
 }
 
 message MonthlyComparison {
   string month = 1; // YYYY-MM
-  google.type.Moneyincome = 2;
-  google.type.Moneyexpenses = 3;
-  google.type.Moneynet = 4;
+  google.type.Money income = 2;
+  google.type.Money expenses = 3;
+  google.type.Money net = 4;
 }
 
 message DashboardSummary {
   int64 total_accounts = 1;
   int64 total_transactions = 2;
-  google.type.Moneytotal_income = 3;
-  google.type.Moneytotal_expenses = 4;
+  google.type.Money total_income = 3;
+  google.type.Money total_expenses = 4;
   int64 transactions_last_30_days = 5;
   int64 uncategorized_transactions = 6;
 }
@@ -33,14 +33,14 @@ message TopCategory {
   string label = 2;
   string color = 3;
   int64 transaction_count = 4;
-  google.type.Moneytotal_amount = 5;
+  google.type.Money total_amount = 5;
 }
 
 message TopMerchant {
   string merchant = 1;
   int64 transaction_count = 2;
-  google.type.Moneytotal_amount = 3;
-  google.type.Moneyavg_amount = 4;
+  google.type.Money total_amount = 3;
+  google.type.Money avg_amount = 4;
 }
 
 message PeriodInfo {
@@ -50,7 +50,7 @@ message PeriodInfo {
 }
 
 message PeriodSpending {
-  google.type.Moneyamount = 1;
+  google.type.Money amount = 1;
   int64 transaction_count = 2;
 }
 
@@ -61,11 +61,11 @@ message CategorySpendingComparison {
 }
 
 message CategorySpendingTotals {
-  google.type.Moneycurrent_period_total = 1;
-  google.type.Moneyprevious_period_total = 2;
+  google.type.Money current_period_total = 1;
+  google.type.Money previous_period_total = 2;
 }
 
 message NetWorthPoint {
   google.type.Date date = 1;
-  google.type.Moneynet_worth = 2;
+  google.type.Money net_worth = 2;
 }

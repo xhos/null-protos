@@ -44,7 +44,7 @@ message CreateAccountRequest {
   string bank = 3;
   AccountType type = 4;
   optional string friendly_name = 5;
-  google.type.Moneyanchor_balance = 6;
+  google.type.Money anchor_balance = 6;
   string main_currency = 7;
   repeated string colors = 8;
 }
@@ -64,7 +64,7 @@ message UpdateAccountRequest {
   optional AccountType account_type = 6;
   optional string friendly_name = 7;
   optional google.protobuf.Timestamp anchor_date = 8;
-  optional google.type.Moneyanchor_balance = 9;
+  optional google.type.Money anchor_balance = 9;
   optional string main_currency = 10;
   repeated string colors = 11;
 }
