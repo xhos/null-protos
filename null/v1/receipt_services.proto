@@ -52,6 +52,7 @@ message GetReceiptRequest {
 message GetReceiptResponse {
   Receipt receipt = 1;
   repeated ReceiptLinkCandidate link_candidates = 2;
+  bytes image_data = 3;
 }
 
 message UpdateReceiptRequest {
