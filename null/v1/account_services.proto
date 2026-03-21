@@ -82,28 +82,32 @@ message DeleteAccountResponse {
 }
 
 message AddAccountAliasRequest {
-  int64 account_id = 1 [(buf.validate.field).int64.gt = 0];
-  string alias = 2 [(buf.validate.field).string.min_len = 1];
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 account_id = 2 [(buf.validate.field).int64.gt = 0];
+  string alias = 3 [(buf.validate.field).string.min_len = 1];
 }
 
 message AddAccountAliasResponse {}
 
 message RemoveAccountAliasRequest {
-  int64 account_id = 1 [(buf.validate.field).int64.gt = 0];
-  string alias = 2 [(buf.validate.field).string.min_len = 1];
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 account_id = 2 [(buf.validate.field).int64.gt = 0];
+  string alias = 3 [(buf.validate.field).string.min_len = 1];
 }
 
 message RemoveAccountAliasResponse {}
 
 message SetAccountAliasesRequest {
-  int64 account_id = 1 [(buf.validate.field).int64.gt = 0];
-  repeated string aliases = 2;
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 account_id = 2 [(buf.validate.field).int64.gt = 0];
+  repeated string aliases = 3;
 }
 
 message SetAccountAliasesResponse {}
 
 message FindAccountByAliasRequest {
-  string alias = 1 [(buf.validate.field).string.min_len = 1];
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  string alias = 2 [(buf.validate.field).string.min_len = 1];
 }
 
 message FindAccountByAliasResponse {
@@ -111,8 +115,9 @@ message FindAccountByAliasResponse {
 }
 
 message MergeAccountsRequest {
-  int64 primary_account_id = 1 [(buf.validate.field).int64.gt = 0];
-  int64 secondary_account_id = 2 [(buf.validate.field).int64.gt = 0];
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 primary_account_id = 2 [(buf.validate.field).int64.gt = 0];
+  int64 secondary_account_id = 3 [(buf.validate.field).int64.gt = 0];
 }
 
 message MergeAccountsResponse {
