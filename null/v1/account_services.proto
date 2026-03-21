@@ -19,6 +19,7 @@ service AccountService {
   rpc RemoveAccountAlias(RemoveAccountAliasRequest) returns (RemoveAccountAliasResponse);
   rpc SetAccountAliases(SetAccountAliasesRequest) returns (SetAccountAliasesResponse);
   rpc FindAccountByAlias(FindAccountByAliasRequest) returns (FindAccountByAliasResponse);
+  rpc MergeAccounts(MergeAccountsRequest) returns (MergeAccountsResponse);
 }
 
 message ListAccountsRequest {
@@ -107,4 +108,14 @@ message FindAccountByAliasRequest {
 
 message FindAccountByAliasResponse {
   Account account = 1;
+}
+
+message MergeAccountsRequest {
+  int64 primary_account_id = 1 [(buf.validate.field).int64.gt = 0];
+  int64 secondary_account_id = 2 [(buf.validate.field).int64.gt = 0];
+}
+
+message MergeAccountsResponse {
+  Account account = 1;
+  int64 transactions_moved = 2;
 }
