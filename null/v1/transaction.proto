@@ -44,6 +44,7 @@ message Transaction {
   // additional fields for API responses
   optional Category category = 18;
   optional string account_name = 19;
+  optional int64 receipt_id = 20;
 }
 
 message TransactionWithScore {
