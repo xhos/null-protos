@@ -42,6 +42,8 @@ message Receipt {
   google.protobuf.Timestamp updated_at = 15;
   optional string transaction_merchant = 16;
   optional google.type.Money transaction_amount = 17;
+  optional google.protobuf.Timestamp image_taken_at = 18;
+  optional google.type.Date best_date = 19;
 }
 
 message ReceiptLinkCandidate {
