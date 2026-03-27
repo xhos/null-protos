@@ -40,6 +40,7 @@ message ListReceiptsRequest {
   optional string query = 8;
   optional int64 min_total_cents = 9;
   optional int64 max_total_cents = 10;
+  optional string currency = 11 [(buf.validate.field).string = {len: 3}];
 }
 
 message ListReceiptsResponse {
