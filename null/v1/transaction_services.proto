@@ -17,6 +17,9 @@ service TransactionService {
   rpc UpdateTransaction(UpdateTransactionRequest) returns (UpdateTransactionResponse);
   rpc DeleteTransaction(DeleteTransactionRequest) returns (DeleteTransactionResponse);
   rpc CategorizeTransactions(CategorizeTransactionsRequest) returns (CategorizeTransactionsResponse);
+  rpc SplitTransaction(SplitTransactionRequest) returns (SplitTransactionResponse);
+  rpc ForgiveTransaction(ForgiveTransactionRequest) returns (ForgiveTransactionResponse);
+  rpc GetFriendBalances(GetFriendBalancesRequest) returns (GetFriendBalancesResponse);
 }
 
 message ListTransactionsRequest {
@@ -118,4 +121,43 @@ message CategorizeTransactionsRequest {
 
 message CategorizeTransactionsResponse {
   int64 affected_rows = 1;
+}
+
+// --- splitting ---
+
+message SplitEntry {
+  int64 friend_account_id = 1 [(buf.validate.field).int64.gt = 0];
+  google.type.Money amount = 2;
+}
+
+message SplitTransactionRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 source_transaction_id = 2 [(buf.validate.field).int64.gt = 0];
+  repeated SplitEntry splits = 3 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message SplitTransactionResponse {
+  repeated Transaction created_splits = 1;
+}
+
+message ForgiveTransactionRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 transaction_id = 2 [(buf.validate.field).int64.gt = 0];
+  bool forgiven = 3;
+}
+
+message ForgiveTransactionResponse {}
+
+message GetFriendBalancesRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+message FriendBalance {
+  int64 account_id = 1;
+  string friend_name = 2;
+  google.type.Money balance = 3;
+}
+
+message GetFriendBalancesResponse {
+  repeated FriendBalance balances = 1;
 }
