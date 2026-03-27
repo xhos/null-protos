@@ -37,6 +37,9 @@ message ListReceiptsRequest {
   optional bool unlinked_only = 5;
   optional google.type.Date start_date = 6;
   optional google.type.Date end_date = 7;
+  optional string query = 8;
+  optional int64 min_total_cents = 9;
+  optional int64 max_total_cents = 10;
 }
 
 message ListReceiptsResponse {
