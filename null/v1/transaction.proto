@@ -45,6 +45,11 @@ message Transaction {
   optional Category category = 18;
   optional string account_name = 19;
   optional int64 receipt_id = 20;
+
+  // splitting
+  optional int64 split_from_id = 21;
+  bool forgiven = 22;
+  repeated Transaction splits = 23;
 }
 
 message TransactionWithScore {

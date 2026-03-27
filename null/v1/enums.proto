@@ -9,6 +9,7 @@ enum AccountType {
   ACCOUNT_CREDIT_CARD = 3;
   ACCOUNT_INVESTMENT = 4;
   ACCOUNT_OTHER = 5;
+  ACCOUNT_FRIEND = 6;
 }
 
 enum TransactionDirection {

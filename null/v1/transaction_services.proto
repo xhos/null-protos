@@ -69,6 +69,7 @@ message TransactionInput {
   optional int64 category_id = 8;
   optional google.type.Money foreign_amount = 9;
   optional double exchange_rate = 10;
+  optional int64 split_from_id = 11;
 }
 
 message CreateTransactionRequest {
