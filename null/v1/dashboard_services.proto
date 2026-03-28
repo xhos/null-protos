@@ -21,6 +21,7 @@ service DashboardService {
   // compares category spending between current and previous period
   rpc GetCategorySpendingComparison(GetCategorySpendingComparisonRequest) returns (GetCategorySpendingComparisonResponse);
   rpc GetNetWorthHistory(GetNetWorthHistoryRequest) returns (GetNetWorthHistoryResponse);
+  rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse);
 }
 
 message GetDashboardSummaryRequest {
@@ -116,4 +117,15 @@ message GetNetWorthHistoryRequest {
 
 message GetNetWorthHistoryResponse {
   repeated NetWorthPoint data_points = 1;
+}
+
+message CurrencyInfo {
+  string code = 1;
+  string name = 2;
+}
+
+message GetCurrenciesRequest {}
+
+message GetCurrenciesResponse {
+  repeated CurrencyInfo currencies = 1;
 }
