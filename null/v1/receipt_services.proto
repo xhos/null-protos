@@ -12,6 +12,7 @@ service ReceiptService {
   rpc GetReceipt(GetReceiptRequest) returns (GetReceiptResponse);
   rpc UpdateReceipt(UpdateReceiptRequest) returns (UpdateReceiptResponse);
   rpc DeleteReceipt(DeleteReceiptRequest) returns (DeleteReceiptResponse);
+  rpc RetryParseReceipt(RetryParseReceiptRequest) returns (RetryParseReceiptResponse);
 }
 
 message UploadReceiptRequest {
@@ -84,3 +85,12 @@ message DeleteReceiptRequest {
 }
 
 message DeleteReceiptResponse {}
+
+message RetryParseReceiptRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 id = 2 [(buf.validate.field).int64.gt = 0];
+}
+
+message RetryParseReceiptResponse {
+  Receipt receipt = 1;
+}
