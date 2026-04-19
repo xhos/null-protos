@@ -16,7 +16,7 @@ message Transaction {
   int64 account_id = 5;
 
   // metadata
-  optional string email_id = 6;
+  optional string external_id = 6;
   optional string description = 7 [(buf.validate.field).string.max_len = 500];
 
   // categorization
