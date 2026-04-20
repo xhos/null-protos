@@ -9,6 +9,7 @@ import "google/protobuf/timestamp.proto";
 service ConnectorService {
   rpc ListSyncJobs(ListSyncJobsRequest) returns (ListSyncJobsResponse);
   rpc CompleteSyncJob(CompleteSyncJobRequest) returns (CompleteSyncJobResponse);
+  rpc CreateConnectedAccount(CreateConnectedAccountRequest) returns (CreateConnectedAccountResponse);
 }
 
 message SyncJob {
@@ -34,3 +35,14 @@ message CompleteSyncJobRequest {
 }
 
 message CompleteSyncJobResponse {}
+
+message CreateConnectedAccountRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  string provider = 2 [(buf.validate.field).string.min_len = 1];
+  // plaintext credentials JSON; server encrypts before storing
+  string credentials = 3 [(buf.validate.field).string.min_len = 1];
+}
+
+message CreateConnectedAccountResponse {
+  int64 id = 1;
+}
