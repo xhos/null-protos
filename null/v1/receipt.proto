@@ -28,7 +28,7 @@ message Receipt {
   int64 id = 1;
   string user_id = 2;
   optional int64 transaction_id = 3;
-  string image_path = 4;
+  optional string image_path = 4;
   optional string merchant = 5;
   optional google.type.Date receipt_date = 6;
   optional string currency = 7;
@@ -44,6 +44,7 @@ message Receipt {
   optional google.type.Money transaction_amount = 17;
   optional google.protobuf.Timestamp image_taken_at = 18;
   optional google.type.Date best_date = 19;
+  string source = 20;
 }
 
 message ReceiptLinkCandidate {
