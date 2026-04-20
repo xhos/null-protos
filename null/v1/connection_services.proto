@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package null.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+service ConnectionsService {
+  rpc ListConnections(ListConnectionsRequest) returns (ListConnectionsResponse);
+  rpc CreateConnection(CreateConnectionRequest) returns (CreateConnectionResponse);
+  rpc DeleteConnection(DeleteConnectionRequest) returns (DeleteConnectionResponse);
+}
+
+message Connection {
+  int64 id = 1;
+  string provider = 2;
+  string status = 3; // 'active' | 'disabled' | 'broken'
+  optional google.protobuf.Timestamp last_synced = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message ListConnectionsRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+message ListConnectionsResponse {
+  repeated Connection connections = 1;
+}
+
+message CreateConnectionRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  string provider = 2 [(buf.validate.field).string.min_len = 1];
+  string credentials = 3 [(buf.validate.field).string.min_len = 1];
+}
+
+message CreateConnectionResponse {
+  int64 id = 1;
+}
+
+message DeleteConnectionRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 id = 2 [(buf.validate.field).int64.gt = 0];
+}
+
+message DeleteConnectionResponse {}
