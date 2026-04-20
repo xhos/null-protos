@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package null.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+// internal-only, consumed by null-connector
+service ConnectorService {
+  rpc ListSyncJobs(ListSyncJobsRequest) returns (ListSyncJobsResponse);
+  rpc CompleteSyncJob(CompleteSyncJobRequest) returns (CompleteSyncJobResponse);
+}
+
+message SyncJob {
+  int64 id = 1;
+  string user_id = 2;
+  string provider = 3;
+  // decrypted, per-provider JSON. wise: {"api_token"}, snaptrade: {"snaptrade_user_id","user_secret"}
+  bytes credentials = 4;
+  optional google.protobuf.Timestamp cursor = 5;
+}
+
+message ListSyncJobsRequest {}
+
+message ListSyncJobsResponse {
+  repeated SyncJob jobs = 1;
+}
+
+message CompleteSyncJobRequest {
+  int64 id = 1 [(buf.validate.field).int64.gt = 0];
+  optional google.protobuf.Timestamp cursor = 2;
+  // 'active' | 'disabled' | 'broken'. omit to leave unchanged
+  optional string status = 3;
+}
+
+message CompleteSyncJobResponse {}
