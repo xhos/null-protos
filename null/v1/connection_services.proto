@@ -9,6 +9,8 @@ service ConnectionsService {
   rpc ListConnections(ListConnectionsRequest) returns (ListConnectionsResponse);
   rpc CreateConnection(CreateConnectionRequest) returns (CreateConnectionResponse);
   rpc DeleteConnection(DeleteConnectionRequest) returns (DeleteConnectionResponse);
+  rpc TriggerSync(TriggerSyncRequest) returns (TriggerSyncResponse);
+  rpc SetSyncInterval(SetSyncIntervalRequest) returns (SetSyncIntervalResponse);
 }
 
 message Connection {
@@ -17,6 +19,9 @@ message Connection {
   string status = 3; // 'active' | 'disabled' | 'broken'
   optional google.protobuf.Timestamp last_synced = 4;
   google.protobuf.Timestamp created_at = 5;
+  // null = manual-only (no scheduled sync)
+  optional int32 sync_interval_minutes = 6;
+  optional google.protobuf.Timestamp next_run_at = 7;
 }
 
 message ListConnectionsRequest {
@@ -31,6 +36,7 @@ message CreateConnectionRequest {
   string user_id = 1 [(buf.validate.field).string.uuid = true];
   string provider = 2 [(buf.validate.field).string.min_len = 1];
   string credentials = 3 [(buf.validate.field).string.min_len = 1];
+  optional int32 sync_interval_minutes = 4 [(buf.validate.field).int32.gt = 0];
 }
 
 message CreateConnectionResponse {
@@ -43,3 +49,19 @@ message DeleteConnectionRequest {
 }
 
 message DeleteConnectionResponse {}
+
+message TriggerSyncRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 id = 2 [(buf.validate.field).int64.gt = 0];
+}
+
+message TriggerSyncResponse {}
+
+message SetSyncIntervalRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  int64 id = 2 [(buf.validate.field).int64.gt = 0];
+  // omit to switch to manual-only (no scheduled sync)
+  optional int32 sync_interval_minutes = 3 [(buf.validate.field).int32.gt = 0];
+}
+
+message SetSyncIntervalResponse {}
